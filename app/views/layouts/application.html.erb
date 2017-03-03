@@ -1,14 +1,55 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>FypSite</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
-<%= yield %>
+    <%= csrf_meta_tags %>
+    <% stylesheet_link_tag    'application',  media: 'all',
+                                              'data-turbolinks-track' => 'reload' %>
+    <% javascript_include_tag 'application',  'data-turbolinks-track' => 'reload' %>
+    <!-- This code is for IE browsers less than IE 9 -->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <header class="navbar navbar-top navbar-inverse">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="<%= root_path %>">
+            Aston
+          </a>
+        </div>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <% if logged_in? %>
+              <li><%= link_to "Home", root_url %></li>
+              <li>Welcome, <%= User.find(session[:user_id]).name %></li>
+              <% if current_user.role?(:admin) %>
+                <li><%= link_to "Users", users_path %></li>
+              <% end %>
+              <li><a href="<%= conversations_path%>">Conversations <span class="badge">3</span></a></li>
+              <li><%= link_to "Profile", current_user %></li>
+              <li><%= link_to "Log Out", sessions_destroy_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to "Log In", login_path %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
 
-</body>
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+
+      <%= yield %>
+      <!--
+        <%= session.inspect %>
+      -->
+    </div>
+  </body>
 </html>

@@ -1,2 +1,43 @@
-<h1>Conversations#show</h1>
+<h1>Messages#index</h1>
 <p>Find me in app/views/conversations/show.html.erb</p>
+
+<h3>Conversation <%= @conversation.id %>
+
+<div class="messages">
+  <% Message.where(conversation_id: @conversation.id).each do |m| %>
+    <% if (Recipient.find(m.sender_id).user.id == current_user.id) %>
+      <div class="panel panel-success">
+    <% else %>
+      <div class="panel panel-info">
+    <% end %>
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <%= Recipient.find(m.sender_id).user.name %>
+          NEW
+        </h3>
+      </div>
+      <div class="panel-body">
+        <%= m.body %>
+      </div>
+    </div>
+    <br/>
+  <% end %>
+</div>
+
+<div class="new_message">
+  <%= form_for Message.new, url: messages_path do |f| %>
+
+
+    <%= f.label :body %>
+    <%= f.text_field :body %>
+
+    <%= f.hidden_field(:conversation_id, value: @conversation.id) %>
+    <% @sender = Recipient.find_by(user_id: current_user.id, conversation_id: @conversation.id) %>
+    <%= f.hidden_field(:sender_id, value: @sender.id) %>
+    <%= f.fields_for :inboxes do |ff| %>
+      <% @conversation.recipients.each do |rec| %>
+        <%= hidden_field_tag "message[recipient_ids][]", rec.id %>
+      <% end %>
+    <% end %>
+    <%= f.submit "Send Message" %>
+  <% end %>

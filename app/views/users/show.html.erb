@@ -1,2 +1,14 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<% provide(:title, "#{@user.name}'s Profile") %>
+<h1>User: <%= @user.name %></h1>
+<h2>Roles:</h2>
+<ul>
+  <% @user.roles.each do |r| %>
+    <li><%= r.name %></li>
+  <% end %>
+</ul>
+<h2>Subjects:</h2>
+<ul>
+  <% @user.enrolments(@user).each do |e| %>
+  <li><%= Subject.find(e.subject_id).name %></li>
+<% end %>
+</ul>

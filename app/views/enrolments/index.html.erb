@@ -1,0 +1,9 @@
+<% provide(:title, "Enrolments") %>
+<h1> Enrolments </h1>
+
+<% Enrolment.all.each do |e| %>
+  <div class="enrolment_class">
+    <h3><%= e.student_id %>, <%= User.find(e.student_id).name %></h3>
+    <h3><%= e.subject_id %>, <%= Subject.find(e.subject_id).name %></h3>
+  </div>
+<% end %>

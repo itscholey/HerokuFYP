@@ -1,2 +1,5 @@
 <h1>Subjects#show</h1>
 <p>Find me in app/views/subjects/show.html.erb</p>
+
+<h2><%= @subject.name %></h2>
+<p><%= User.find(@subject.teacher_id).name %></p>

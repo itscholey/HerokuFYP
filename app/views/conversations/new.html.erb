@@ -1,2 +1,13 @@
-<h1>Conversations#new</h1>
-<p>Find me in app/views/conversations/new.html.erb</p>
+<div class="new_conversation">
+  <%= form_for :conversation, url: conversations_path do |f| %>
+  <%= f.fields_for :recipients do |ff| %>
+    <% User.all.each do |user| %>
+       <label>
+          <%= check_box_tag "conversation[user_ids][]", user.id %>
+          <%= user.name %>
+       </label>
+    <% end %>
+  <% end %>
+    <%= f.submit "Create Conversation" %>
+  <% end %>
+</div>

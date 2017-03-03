@@ -1,0 +1,24 @@
+<%= form_for :subject, url: subjects_path do |f| %>
+  <% if @subject.errors.any? %>
+    <div id="error_description">
+      The form contains <%= pluralize(@subject.errors.count, "error") %>.
+      <ul>
+        <% @subject.errors.full_messages.each do |m| %>
+          <li><%= m %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :classGroup %>
+  <%= f.text_field :classGroup %>
+
+  <%= f.label :teacher_id %>
+  <%= f.text_field :teacher_id %>
+
+  <br/>
+  <%= f.submit yield(:button_text) %>
+<% end %>

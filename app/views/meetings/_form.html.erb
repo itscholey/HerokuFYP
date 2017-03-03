@@ -1,0 +1,41 @@
+<%= form_for :meeting, url: meetings_path do |f| %>
+  <% if @meeting.errors.any? %>
+    <div id="error_description">
+      The form contains <%= pluralize(@meeting.errors.count, "error") %>.
+      <ul>
+        <% @meeting.errors.full_messages.each do |m| %>
+          <li><%= m %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :subject %>
+  <%= f.text_field :subject %>
+  <br/>
+
+  <%= f.label :date %>
+  <%= f.datetime_select :date, order: [:day, :month, :year, :hour, :minute] %>
+  <br/>
+
+  <%= f.label :location %>
+  <%= f.text_field :location %>
+
+  <%= f.label :agenda %>
+  <%= f.text_area :agenda %>
+
+  <%= f.fields_for :attendees do |ff| %>
+    <% User.all.each do |user| %>
+       <label>
+          <%= check_box_tag "meeting[user_ids][]", user.id %>
+          <%= user.name %>
+       </label>
+    <% end %>
+  <% end %>
+
+  <br/>
+  <%= f.submit yield(:button_text) %>
+<% end %>
+
+<%= debug(params) %>
+<%= debug(@meeting.errors) %>

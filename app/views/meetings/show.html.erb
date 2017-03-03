@@ -1,2 +1,9 @@
+<% provide(:title, "Meeting") %>
+
 <h1>Meetings#show</h1>
 <p>Find me in app/views/meetings/show.html.erb</p>
+
+<%= @meeting.subject %>
+<% @meeting.users.each do |a| %>
+  <%= a.name %>
+<% end %>

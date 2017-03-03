@@ -1,2 +1,13 @@
+<% provide(:title, "Create Meeting") %>
+<% provide(:button_text, "Create Meeting") %>
+
 <h1>Meetings#new</h1>
 <p>Find me in app/views/meetings/new.html.erb</p>
+
+<%= render "form" %>
+
+<%= @meeting.inspect %>
+<br/>
+<% @meeting.user_ids.each do |u| %>
+  <%= u %>
+<% end %>
