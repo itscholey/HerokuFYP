@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: fyp-site_production
-  username: fyp-site
-  password: <%= ENV['FYP-SITE_DATABASE_PASSWORD'] %>
+  username: chloe
+  password: fyp2016
