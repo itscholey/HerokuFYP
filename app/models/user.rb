@@ -42,6 +42,6 @@ end
 
   def enrolments(user)
     return User.find_by_sql("
-          SELECT * FROM enrolments, users WHERE enrolments.student_id = users.id AND users.id = #{user.id} ")
+          SELECT * FROM enrolments, users WHERE enrolments.user_id = users.id AND users.id = #{user.id} ")
   end
 end
