@@ -1,5 +1,9 @@
 class MessagesController < ApplicationController
 
+  def index
+    @messages = Message.all
+  end
+
   def new
     @message = Message.new
   end
@@ -16,7 +20,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:body, :sender_id, :conversation_id, recipient_ids: [])
+    params.require(:message).permit(:body, :recipient_id, :conversation_id, recipient_ids: [])
   end
 
 end

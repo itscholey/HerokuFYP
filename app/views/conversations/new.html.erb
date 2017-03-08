@@ -1,13 +1,18 @@
 <div class="new_conversation">
   <%= form_for :conversation, url: conversations_path do |f| %>
-  <%= f.fields_for :recipients do |ff| %>
-    <% User.all.each do |user| %>
-       <label>
-          <%= check_box_tag "conversation[user_ids][]", user.id %>
-          <%= user.name %>
-       </label>
+    <%= f.fields_for :recipients do |ff| %>
+      <% User.all.each do |user| %>
+         <label>
+           <% if (user.id != current_user.id) %>
+              <%= check_box_tag "conversation[user_ids][]", user.id, true %>
+              <%= user.name %>
+            <% else %>
+              <%= check_box_tag "conversation[user_ids][]", user.id, true, style: 'visibility: hidden' %>
+            <% end %>
+         </label>
+      <% end %>
     <% end %>
-  <% end %>
+
     <%= f.submit "Create Conversation" %>
   <% end %>
 </div>

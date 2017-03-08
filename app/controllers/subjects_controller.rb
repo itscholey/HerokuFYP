@@ -9,7 +9,7 @@ class SubjectsController < ApplicationController
 
   def create
     @subject = Subject.new(subject_params)
-    teacher = User.find(@subject.teacher_id)
+    teacher = User.find(@subject.user_id)
     if teacher.role?(:teacher) or teacher.role?(:admin)
       if @subject.save
         render :show
@@ -45,6 +45,6 @@ class SubjectsController < ApplicationController
 
   private
     def subject_params
-      params.require(:subject).permit(:name, :classGroup, :teacher_id)
+      params.require(:subject).permit(:name, :classGroup, :user_id)
     end
 end

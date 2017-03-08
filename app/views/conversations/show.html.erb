@@ -5,14 +5,14 @@
 
 <div class="messages">
   <% Message.where(conversation_id: @conversation.id).each do |m| %>
-    <% if (Recipient.find(m.sender_id).user.id == current_user.id) %>
+    <% if (Recipient.find(m.recipient_id).user.id == current_user.id) %>
       <div class="panel panel-success">
     <% else %>
       <div class="panel panel-info">
     <% end %>
       <div class="panel-heading">
         <h3 class="panel-title">
-          <%= Recipient.find(m.sender_id).user.name %>
+          <%= Recipient.find(m.recipient_id).user.name %>
           NEW
         </h3>
       </div>
@@ -32,8 +32,8 @@
     <%= f.text_field :body %>
 
     <%= f.hidden_field(:conversation_id, value: @conversation.id) %>
-    <% @sender = Recipient.find_by(user_id: current_user.id, conversation_id: @conversation.id) %>
-    <%= f.hidden_field(:sender_id, value: @sender.id) %>
+    <%  @sender = Recipient.find_by(user_id: current_user.id, conversation_id: @conversation.id) %>
+    <%= f.hidden_field(:recipient_id, value: @sender.id) %>
     <%= f.fields_for :inboxes do |ff| %>
       <% @conversation.recipients.each do |rec| %>
         <%= hidden_field_tag "message[recipient_ids][]", rec.id %>
