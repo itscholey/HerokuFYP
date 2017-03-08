@@ -16,7 +16,6 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
 
-  <% if current_user.role?(:admin) and params[:action] == "new" %>
     <%= f.fields_for :roles do |ff| %>
       <% Role.all.each do |role| %>
          <label>
@@ -25,7 +24,6 @@
          </label>
       <% end %>
     <% end %>
-  <% end %>
 
   <br/>
   <%= f.submit yield(:button_text) %>
