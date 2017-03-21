@@ -1,5 +1,9 @@
 <h1>Subjects#show</h1>
 <p>Find me in app/views/subjects/show.html.erb</p>
+<%= link_to "Back to Subjects", subjects_path %>
 
 <h2><%= @subject.name %></h2>
 <p><%= User.find(@subject.user_id).name %></p>
+<p><%= @subject.classGroup %></p>
+
+<%= link_to "Create a New Lesson", new_lesson_path %>
