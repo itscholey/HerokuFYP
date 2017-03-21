@@ -1,4 +1,4 @@
-<%= form_for :lesson, url: lessons_path do |f| %>
+<%= form_for @lesson do |f| %>
   <% if @lesson.errors.any? %>
     <div id="error_description">
       The form contains <%= pluralize(@lesson.errors.count, "error") %>.
