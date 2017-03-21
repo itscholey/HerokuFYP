@@ -1,2 +1,7 @@
 <h1>Lessons#show</h1>
 <p>Find me in app/views/lessons/show.html.erb</p>
+<%= link_to "Back to #{@lesson.subject.name}", @lesson.subject %>
+
+<p><%= @lesson.name %></p>
+<p><%= @lesson.subject.name %></p>
+<p><%= @lesson.subject.user.name %></p>
