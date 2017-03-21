@@ -3,13 +3,15 @@
 
 <%= link_to "Create Subject", new_subject_path %>
 
-<% @subjects.each do |s| %>
+<% @subjects.each do |subject| %>
   <div class="panel panel-info">
     <div class="panel-heading">
-      <h3 class="panel-title"><%= link_to s.name, s %></h3>
+      <h3 class="panel-title"><%= link_to subject.name, subject %></h3>
     </div>
     <div class="panel-body">
-      Teacher: <%= User.find(s.user_id).name %>
+      Teacher: <%= User.find(subject.user_id).name %>
+
+      
     </div>
   </div>
   <br/>

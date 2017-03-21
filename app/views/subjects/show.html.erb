@@ -9,6 +9,11 @@
 <p><%= User.find(@subject.user_id).name %></p>
 <p><%= @subject.classGroup %></p>
 
+<h3>Enroled Students</h3>
+<% @subject.users.each do |user| %>
+  <p><%= user.name %></p>
+<% end %>
+
 <% Lesson.where(subject_id: @subject.id).each do |lesson| %>
   <div class="panel panel-info">
     <div class="panel-heading">
