@@ -1,5 +1,6 @@
 <% provide(:title, "Users") %>
 <h1> Users </h1>
+<p><%= link_to "Create New User", new_user_path %></p>
 
 <% User.all.each do |u| %>
 
