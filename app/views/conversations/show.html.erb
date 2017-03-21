@@ -13,7 +13,11 @@
       <div class="panel-heading">
         <h3 class="panel-title">
           <%= Recipient.find(m.recipient_id).user.name %>
-          NEW
+          <% if (Message.find(m.id).recipient_id != Recipient.)
+          ## DO A CONDITION TO FIND "NEW"
+            #(Inbox.where(recipient_id: m.recipient_id, message_id: m.id, read: false)) %>
+            NEW
+          <% end %>
         </h3>
       </div>
       <div class="panel-body">
