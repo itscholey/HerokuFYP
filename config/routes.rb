@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post    '/login',    to: 'sessions#create'
   delete  '/logout',   to: 'sessions#destroy'
   get     '/calendar', to: 'static_pages#calendar'
+  get     '/home',     to: 'static_pages#home'
 
 
   resources :users
@@ -33,7 +34,7 @@ Rails.application.routes.draw do
   resources :messages
   resources :conversations
 
-  root 'users#index'
+  root 'static_pages#home'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

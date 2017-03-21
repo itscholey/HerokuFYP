@@ -15,7 +15,7 @@
     <![endif]-->
   </head>
   <body>
-    <header class="navbar navbar-top navbar-inverse">
+    <header class="navbar navbar-top navbar-inverse nav-fill">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="<%= root_path %>">
@@ -23,24 +23,34 @@
           </a>
         </div>
         <nav>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav nav-pills nav-fill">
             <% if logged_in? %>
-              <li><%= link_to "Home", root_url %></li>
-              <li><%= link_to "Welcome, #{User.find(session[:user_id]).name}", current_user %></li>
+              <li class="nav-item">
+                <a class="nav-link active" href="<%= root_url %>">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="<%= user_path(current_user) %>">Welcome, <%= User.find(session[:user_id]).name %></a>
+              </li>
               <% if current_user.role?(:admin) %>
-                <li><%= link_to "Users", users_path %></li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="<%= users_path %>">Users</a>
+                </li>
               <% end %>
-              <li>
-                <a href="<%= conversations_path%>">Conversations
+              <li class="nav-item">
+                <a class="nav-link active" href="<%= conversations_path %>">
+                  Conversations
                   <span class="badge">
                     <%= Inbox.where(recipient_id: Recipient.where(user_id: current_user.id).first.id, read: false).count %>
                   </span>
                 </a>
               </li>
-              <li><%= link_to "Profile", current_user %></li>
-              <li><%= link_to "Log Out", sessions_destroy_path, method: :delete %></li>
+              <li class="nav-item">
+                <a class="nav-link active" href="<%= sessions_destroy_path %>", rel="nofollow" data-method="delete">Logout</a>
+              </li>
             <% else %>
-              <li><%= link_to "Log In", login_path %></li>
+              <li class="nav-item">
+                <a class="nav-link active" href="<%= login_path %>">Log In</a>
+              </li>
             <% end %>
           </ul>
         </nav>
@@ -53,9 +63,9 @@
       <% end %>
 
       <%= yield %>
-      <!--
-        <%= session.inspect %>
-      -->
+    <!--
+      <%= session.inspect %>
+    -->
     </div>
   </body>
 </html>
