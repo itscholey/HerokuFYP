@@ -19,6 +19,6 @@ class EnrolmentsController < ApplicationController
   private
 
   def enrolment_params
-    params.require(:enrolment).permit(:student_id, :subject_id)
+    params.require(:enrolment).permit(:user_id, :subject_id)
   end
 end
