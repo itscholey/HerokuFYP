@@ -20,6 +20,12 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:id])
   end
 
+  def destroy
+    Conversation.find(params[:id]).destroy
+    flash[:success] = "Conversation deleted"
+    redirect_to conversations
+  end
+
   private
 
   def conversation_params

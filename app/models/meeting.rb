@@ -1,5 +1,5 @@
 class Meeting < ActiveRecord::Base
-  has_many :attendees
+  has_many :attendees, dependent: :destroy
   has_many :users, through: :attendees
 
   def user_symbols
