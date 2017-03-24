@@ -1,4 +1,4 @@
 class Attendee < ActiveRecord::Base
-  belongs_to :user, dependent: :destroy
-  belongs_to :meeting, dependent: :destroy
+  belongs_to :user
+  belongs_to :meeting
 end

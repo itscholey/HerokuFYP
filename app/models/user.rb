@@ -10,18 +10,18 @@ class User < ActiveRecord::Base
   #validates :password,  presence: true, length: { minimum: 8 }
 
 
-  has_many :assignments, dependent: :destroy
+  has_many :assignments
   has_many :roles, through: :assignments
 
-  belongs_to :subject, dependent: :destroy #as teacher
+  belongs_to :subject #as teacher
 
-  has_many :enrolments, dependent: :destroy #as a student
+  has_many :enrolments #as a student
   has_many :subjects, through: :enrolments
 
-  has_many :attendees, dependent: :destroy
+  has_many :attendees
   has_many :meetings, through: :attendees
 
-  has_many :recipients, dependent: :destroy
+  has_many :recipients
   has_many :conversations, through: :recipients
 
   has_secure_password
