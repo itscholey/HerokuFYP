@@ -1,3 +1,7 @@
+/* line 7, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/static_pages.scss */
+h1 {
+  color: #DDD;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -10,10 +14,9 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
-  *= require_tree .
-  *= require_self
+
+
 
 
  */
 
- h1 {background-color: #CDC }
