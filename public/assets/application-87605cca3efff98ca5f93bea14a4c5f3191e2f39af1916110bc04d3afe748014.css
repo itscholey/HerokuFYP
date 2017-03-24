@@ -1,7 +1,11 @@
-/* line 4, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/static_pages.scss */
-.calendar td {
-  height: 100px;
-  width: 14.28%;
+/* line 6, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/static_pages.scss */
+body {
+  background-color: #CCC;
+}
+
+/* line 7, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/static_pages.scss */
+h1 {
+  color: #DDD;
 }
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
@@ -15,6 +19,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+
+
 
 
  */
