@@ -23,7 +23,7 @@ class ConversationsController < ApplicationController
   def destroy
     Conversation.find(params[:id]).destroy
     flash[:success] = "Conversation deleted"
-    redirect_to conversations
+    redirect_to conversations_path
   end
 
   private

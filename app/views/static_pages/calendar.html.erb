@@ -1,6 +1,9 @@
 <h1>StaticPages#calendar</h1>
 <p>Find me in app/views/static_pages/calendar.html.erb</p>
 
-  <%= month_calendar do |date| %>
-    <%= date.day %>
+<%= month_calendar events: Meeting.all do |date, meetings| %>
+  <%= date.day %>
+  <% meetings.each do |meeting| %>
+    <%= meeting.subject %>
   <% end %>
+<% end %>

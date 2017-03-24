@@ -1,6 +1,12 @@
 class Meeting < ActiveRecord::Base
+  extend SimpleCalendar
+
   has_many :attendees
   has_many :users, through: :attendees
+
+  def start_time
+    date
+  end
 
   def user_symbols
     users.map do |user|
