@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324103047) do
+ActiveRecord::Schema.define(version: 20170326171350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actionplans", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.integer  "student_id"
+    t.integer  "supervisor_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id"
@@ -132,6 +141,8 @@ ActiveRecord::Schema.define(version: 20170324103047) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "actionplans", "users", column: "student_id"
+  add_foreign_key "actionplans", "users", column: "supervisor_id"
   add_foreign_key "assignments", "roles", on_delete: :cascade
   add_foreign_key "assignments", "users", on_delete: :cascade
   add_foreign_key "attendees", "meetings", on_delete: :cascade

@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'actionplans/new'
+
+  get 'actionplans/edit'
+
+  get 'actionplans/show'
+
   get 'messages/new'
 
   #get 'users/index'
