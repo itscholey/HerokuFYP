@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
   has_many :recipients
   has_many :conversations, through: :recipients
 
+  has_many :actionitemassignees
+  has_many :actionitems, through: :actionitemassignees
+
   has_secure_password
 
   def role_symbols
