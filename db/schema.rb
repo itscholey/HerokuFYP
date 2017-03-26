@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170326171350) do
+ActiveRecord::Schema.define(version: 20170326191425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actionitems", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "actionplan_id"
+    t.datetime "target_completion_date"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "actionitems", ["actionplan_id"], name: "index_actionitems_on_actionplan_id", using: :btree
 
   create_table "actionplans", force: :cascade do |t|
     t.string   "title"
@@ -141,6 +152,7 @@ ActiveRecord::Schema.define(version: 20170326171350) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "actionitems", "actionplans"
   add_foreign_key "actionplans", "users", column: "student_id"
   add_foreign_key "actionplans", "users", column: "supervisor_id"
   add_foreign_key "assignments", "roles", on_delete: :cascade
