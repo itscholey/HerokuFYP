@@ -11,18 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170326191425) do
+ActiveRecord::Schema.define(version: 20170327095657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actionitemassignees", force: :cascade do |t|
+    t.integer  "actionitem_id"
+    t.integer  "user_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "actionitemassignees", ["actionitem_id"], name: "index_actionitemassignees_on_actionitem_id", using: :btree
+  add_index "actionitemassignees", ["user_id"], name: "index_actionitemassignees_on_user_id", using: :btree
 
   create_table "actionitems", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.integer  "actionplan_id"
     t.datetime "target_completion_date"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.boolean  "completed",              default: false
   end
 
   add_index "actionitems", ["actionplan_id"], name: "index_actionitems_on_actionplan_id", using: :btree
@@ -152,6 +163,8 @@ ActiveRecord::Schema.define(version: 20170326191425) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "actionitemassignees", "actionitems"
+  add_foreign_key "actionitemassignees", "users"
   add_foreign_key "actionitems", "actionplans"
   add_foreign_key "actionplans", "users", column: "student_id"
   add_foreign_key "actionplans", "users", column: "supervisor_id"

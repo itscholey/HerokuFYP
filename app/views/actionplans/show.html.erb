@@ -1,2 +1,75 @@
 <h1>Actionplans#show</h1>
 <p>Find me in app/views/actionplans/show.html.erb</p>
+
+<%= link_to "Back to Action Plans", actionplans_path %>
+<h3>Action Plan
+    <%= @actionplan.id %></h3>
+
+<div class="actionplan">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <%= @actionplan.title %>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <p><%= @actionplan.description %></p>
+            <p>Supervisor:
+                <%= @actionplan.supervisor.name %></p>
+            <p>Regarding:
+                <%= @actionplan.student.name %></p>
+            <p>Date Created:
+                <%= @actionplan.created_at %></p>
+
+            <ul class="action_items">
+                <% @actionplan.actionitems.each do |item| %>
+                <li><%= item.name %>
+                    <ul>
+                        <li>ID:
+                            <%= item.id %></li>
+                        <li>Description:
+                            <%= item.description %></li>
+                        <li>Target Completion Date:
+                            <%= item.target_completion_date %></li>
+                        <li>Assignees:
+                          <ul>
+                            <% item.actionitemassignees.each do |assignee| %>
+                              <li><%= assignee.user.name %></li>
+                            <% end %>
+                          </ul>
+                        </li>
+                    </ul>
+                </li>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+    <br/>
+</div>
+
+<div class="new_actionitem">
+    <%= form_for Actionitem.new, url: actionitems_path do |f| %>
+
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+
+    <%= f.label :target_completion_date %>
+    <%= f.datetime_select :target_completion_date, order: [:day, :month, :year, :hour, :minute] %>
+
+    <%= f.hidden_field(:actionplan_id, value: @actionplan.id) %>
+
+    <%= f.fields_for :actionitemassignees do |ff| %>
+    <% User.all.each do |user| %>
+    <label>
+        <%= check_box_tag "actionitem[user_ids][]", user.id %>
+        <%= user.name %>
+    </label>
+    <% end %>
+    <% end %>
+
+    <%= f.submit "Create Action Item" %>
+    <% end %>
+</div>

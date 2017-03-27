@@ -26,6 +26,6 @@ class ActionplansController < ApplicationController
   private
 
   def actionplan_params
-    params.require(:actionitems).permit(:title, :description, :student_id, :supervisor_id)
+    params.require(:actionplans).permit(:title, :description, :student_id, :supervisor_id)
   end
 end

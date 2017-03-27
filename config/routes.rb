@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'actionplans/new'
-
-  get 'actionplans/edit'
-
-  get 'actionplans/show'
-
   get 'messages/new'
 
   #get 'users/index'
@@ -39,6 +33,8 @@ Rails.application.routes.draw do
   resources :meetings
   resources :messages
   resources :conversations
+  resources :actionplans
+  resources :actionitems
 
   root 'static_pages#home'
 

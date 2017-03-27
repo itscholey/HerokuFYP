@@ -5,6 +5,15 @@
   <%= date.day %>
   <% meetings.each do |meeting| %>
     <%= link_to meeting.subject, meeting %>
-    </br>
+    <br/>
+  <% end %>
+<% end %>
+
+
+<%= month_calendar events: Actionitem.all do |date, items| %>
+  <%= date.day %>
+  <% items.each do |item| %>
+    <%= link_to item.name, item %>
+    <br/>
   <% end %>
 <% end %>
