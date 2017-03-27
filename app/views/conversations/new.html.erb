@@ -1,5 +1,5 @@
 <div class="new_conversation">
-  <%= form_for :conversation, url: conversations_path do |f| %>
+  <%= form_for @conversation do |f| %>
     <%= f.fields_for :recipients do |ff| %>
       <% User.all.each do |user| %>
          <label>
