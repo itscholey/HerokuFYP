@@ -1,2 +1,36 @@
 <h1>Actionplans#new</h1>
 <p>Find me in app/views/actionplans/new.html.erb</p>
+
+<%= link_to "Back to Action Plan", actionplans_path %>
+
+<div class="new_actionplan">
+  <%= form_for @actionplan do |f| %>
+
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <br/>
+
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+    <br/>
+
+    <%= f.label :student_id %>
+    <% User.all.each do |user| %>
+      <label>
+         <%= radio_button_tag "actionplan[student_id]", user.id %>
+         <%= user.name %>
+      </label>
+    <% end %>
+    <br/>
+
+    <%= f.label :supervisor_id %>
+    <% User.all.each do |user| %>
+      <label>
+         <%= radio_button_tag "actionplan[supervisor_id]", user.id %>
+         <%= user.name %>
+      </label>
+    <% end %>
+    <br/>
+
+    <%= f.submit "Create Action Plan" %>
+  <% end %>
