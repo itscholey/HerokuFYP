@@ -1,21 +1,61 @@
-<h1>Conversations#index</h1>
-<p>Find me in app/views/conversations/index.html.erb</p>
+<% provide(:title, "Conversations") %>
 
-<% @conversations.each do |conversation| %>
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <h3 class="panel-title">
-        <% conversation.recipients.each do |r| %>
-          <%= link_to r.user.name, r.user %>
-        <% end %>
-      </h3>
-    </div>
-    <div class="panel-body">
-      <%= link_to "View Messages", conversation %>
-      <%= link_to "Delete Conversation", conversation, authenticity_token: form_authenticity_token, method: :delete, data: {confirm: "Are you sure?"} %>
-    </div>
-  </div>
-  <br/>
-<% end %>
+<div class="title">
+    <h1>Conversations</h1>
+</div>
 
-<%= link_to "New Conversation", new_conversation_path %>
+<%= link_to "Create a New Conversation", new_conversation_path, class: "btn btn-primary back-button" %>
+
+<div class="conversations">
+
+    <% current_user.conversations.each do |conversation| %>
+
+    <div class="conversation">
+        <div class="panel
+                <% if Inbox.where(recipient_id: Recipient.where(user_id: current_user.id).first.id, read: false).count > 0 %>
+                  <%= "panel-info" %>
+                <% else %>
+                  <%= "panel-primary" %>
+                <% end %>
+                ">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                  <% conversation.recipients.each do |r| %>
+                    <%= link_to r.user.name, r.user %>
+                  <% end %>
+                </h3>
+            </div>
+            <div class="panel-body">
+              <div class="conversation-info">
+                <div class="links">
+                  <%= link_to "View Messages", conversation %>
+                  <%= link_to "Delete Conversation", conversation, authenticity_token: form_authenticity_token, method: :delete, data: {confirm: "Are you sure?"} %>
+                </div>
+                <div class="unread"
+                  <span class="badge">
+                    Unread Messages:
+                    <%= Inbox.where(recipient_id: Recipient.where(user_id: current_user.id).first.id, read: false).count %>
+                  </span>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <% end %>
+
+<!--    <nav aria-label="Conversation pagination">
+        <ul class="pager">
+            <li class="previous">
+                <a href="#">
+                    <span aria-hidden="true">&larr;</span>
+                    Older</a>
+            </li>
+            <li class="next">
+                <a href="#">Newer
+                    <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+-->
+</div>

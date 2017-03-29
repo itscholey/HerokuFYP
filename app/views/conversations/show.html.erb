@@ -1,51 +1,76 @@
-<h1>Messages#index</h1>
-<p>Find me in app/views/conversations/show.html.erb</p>
-<%= link_to "Back to Conversations", conversations_path %>
-<h3>Conversation <%= @conversation.id %>
+<% @count = @conversation.recipients.count %>
+<% @recipient_str = "" %>
+<% @i = 1 %>
+<% @conversation.recipients.each do |r| %>
+<% @recipient_str += r.user.name %>
 
-<div class="messages">
+<% if @i < @count %>
+<% @recipient_str += ", " %>
+<% end %>
+<% @i += 1 %>
+<% end %>
+<% provide(:title, "Conversation with: #{@recipient_str}") %>
+
+<div class="title">
+    <h1>Conversation with:
+        <br/>
+        <%= @recipient_str %></h1>
+</div>
+
+<%= link_to "Back to Conversations", conversations_path, class: "btn btn-primary back-button" %>
+
+<div class="messages scroll-area">
   <% Message.where(conversation_id: @conversation.id).each do |m| %>
     <% if (Recipient.find(m.recipient_id).user.id == current_user.id) %>
       <div class="panel panel-success">
     <% else %>
       <div class="panel panel-info">
     <% end %>
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <%= Recipient.find(m.recipient_id).user.name %>
-          <% current_inbox = Inbox.where(recipient_id: m.recipient_id, message_id: m.id).first %>
-          <% if (Message.find(m.id).recipient_id != Recipient.where(user_id: current_user.id, conversation_id: m.conversation_id).first.id) %>
-            <% if (current_inbox.read == false) %>
-              NEW
-            <% end %>
-          <% end %>
-          <% current_inbox.read = true %>
-          <% current_inbox.save %>
-
-        </h3>
-      </div>
-      <div class="panel-body">
-        <%= m.body %>
-      </div>
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <%= Recipient.find(m.recipient_id).user.name %>, sent:
+                <%= m.created_at.strftime("%H:%M, %-d %B %Y") %>
+                <% current_inbox = Inbox.where(recipient_id: m.recipient_id, message_id: m.id).first %>
+                <% if (Message.find(m.id).recipient_id != Recipient.where(user_id: current_user.id, conversation_id: m.conversation_id).first.id) %>
+                  <% if (current_inbox.read == false) %>
+                    NEW
+                  <% end %>
+                <% end %>
+                <% current_inbox.read = true %>
+                <% current_inbox.save %>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <%= m.body %>
+        </div>
     </div>
-    <br/>
   <% end %>
 </div>
 
+
 <div class="new_message">
-  <%= form_for Message.new, url: messages_path do |f| %>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Send a new message:
+            </h3>
+        </div>
+        <div class="panel-body">
+            <%= form_for Message.new, url: messages_path do |f| %>
+            <%= f.label :body, hidden: true %>
+            <%= f.text_area :body %>
+            <br/>
 
-
-    <%= f.label :body %>
-    <%= f.text_field :body %>
-
-    <%= f.hidden_field(:conversation_id, value: @conversation.id) %>
-    <%  @sender = Recipient.find_by(user_id: current_user.id, conversation_id: @conversation.id) %>
-    <%= f.hidden_field(:recipient_id, value: @sender.id) %>
-    <%= f.fields_for :inboxes do |ff| %>
-      <% @conversation.recipients.each do |rec| %>
-        <%= hidden_field_tag "message[recipient_ids][]", rec.id %>
-      <% end %>
-    <% end %>
-    <%= f.submit "Send Message" %>
-  <% end %>
+            <%= f.hidden_field(:conversation_id, value: @conversation.id) %>
+            <%  @sender = Recipient.find_by(user_id: current_user.id, conversation_id: @conversation.id) %>
+            <%= f.hidden_field(:recipient_id, value: @sender.id) %>
+            <%= f.fields_for :inboxes do |ff| %>
+            <% @conversation.recipients.each do |rec| %>
+            <%= hidden_field_tag "message[recipient_ids][]", rec.id %>
+            <% end %>
+            <% end %>
+            <%= f.submit "Send Message", class: "btn btn-primary" %>
+            <% end %>
+        </div>
+    </div>
+</div>

@@ -17,11 +17,50 @@
  */
 
 // global
-  h1 {
-    background-color: #CDC
+
+  .title {
+    padding-bottom: 10px;
   }
 
+  .scroll-area {
+    height:calc(200px);
+    overflow-y:scroll;
+    margin-bottom: 25px;
+  }
+
+.back-button {
+  margin-bottom: 25px;
+}
+
 // conversations
+
+.conversation-info .links {
+  float:left
+}
+
+.conversation-info .unread {
+  float:right
+}
+
+.messages {
+  height:calc(500px);
+  overflow-y:scroll;
+}
+
+.new_message textarea {
+  resize: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  height: 100px;
+}
+
+.new_message .btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 // enrolments
 
