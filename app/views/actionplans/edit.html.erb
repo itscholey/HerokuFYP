@@ -1,2 +1,8 @@
-<h1>Actionplans#edit</h1>
-<p>Find me in app/views/actionplans/edit.html.erb</p>
+<% provide(:title, "Edit Action Plan") %>
+<% provide(:pagetitle, "Edit Action Plan: #{@actionplan.title}") %>
+<% provide(:button_text, "Save Changes") %>
+<% provide(:view_class, "edit_actionplan") %>
+
+<%= link_to "Back to Action Plan: #{@actionplan.title}", @actionplan, class: "btn btn-primary task-button" %>
+
+<%= render 'form' %>

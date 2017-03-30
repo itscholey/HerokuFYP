@@ -34,6 +34,24 @@
   margin-top: 25px;
 }
 
+// action plans
+.new_actionplan textarea {
+  resize: none;
+  height: 200px;
+}
+
+.actionplan_students, .actionitem_assignees {
+  margin-top: 25px;
+}
+
+.new_actionplan .scroll-area, .edit_actionplan .scroll-area, .new_actionitem .scroll-area {
+  max-height: 200px;
+}
+
+.actionplan .scroll-area {
+  max-height: 500px;
+}
+
 // conversations
 
 .conversation-info .links {
@@ -74,7 +92,7 @@
   height: 200px;
 }
 
-.meeting_attendees scroll-area {
+.meeting_attendees .scroll-area {
   max-height: 200px;
 }
 

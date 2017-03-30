@@ -1,75 +1,118 @@
-<h1>Actionplans#show</h1>
-<p>Find me in app/views/actionplans/show.html.erb</p>
+<% provide(:title, "Action Plan: #{@actionplan.title}") %>
+<% provide(:pagetitle, "Action Plan: #{@actionplan.title}") %>
 
-<%= link_to "Back to Action Plans", actionplans_path %>
-<h3>Action Plan
-    <%= @actionplan.id %></h3>
+<%= link_to "Back to Action Plans", actionplans_path, class: "btn btn-primary task-button" %>
 
 <div class="actionplan">
-    <div class="panel panel-info">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">
-                <%= @actionplan.title %>
+                Action Plan Details
             </h3>
         </div>
-        <div class="panel-body">
-            <p><%= @actionplan.description %></p>
-            <p>Supervisor:
-                <%= @actionplan.supervisor.name %></p>
-            <p>Regarding:
-                <%= @actionplan.student.name %></p>
-            <p>Date Created:
-                <%= @actionplan.created_at %></p>
+        <div class="panel-body scroll-area">
+          <p>Regarding:
+              <%= @actionplan.student.name %></p>
+          <p>Supervisor:
+              <%= @actionplan.supervisor.name %></p>
+          <p>Description:
+              <%= @actionplan.description %></p>
+          <p>Date Created:
+              <%= format_datetime(@actionplan.created_at) %></p>
 
-            <ul class="action_items">
-                <% @actionplan.actionitems.each do |item| %>
-                <li><%= item.name %>
-                    <ul>
-                        <li>ID:
-                            <%= item.id %></li>
-                        <li>Description:
-                            <%= item.description %></li>
-                        <li>Target Completion Date:
-                            <%= item.target_completion_date %></li>
-                        <li>Assignees:
+          <div class="actionplan_actionitems">
+              <% @actionplan.actionitems.each do |item| %>
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h3 class="panel-title">
+                          <%= item.name %></h3>
+                  </div>
+                  <div class="panel-body">
+                      <p>Description:
+                          <%= item.description %></p>
+                      <p>Target Completion Date:
+                          <%= format_datetime(item.target_completion_date) %></p>
+                      <p>Assignees:
                           <ul>
-                            <% item.actionitemassignees.each do |assignee| %>
+                              <% item.actionitemassignees.each do |assignee| %>
                               <li><%= assignee.user.name %></li>
-                            <% end %>
+                              <% end %>
                           </ul>
-                        </li>
-                    </ul>
-                </li>
-                <% end %>
-            </ul>
+                      </p>
+                      <p>
+                        <%= link_to "Edit Action Item", edit_actionitem_path(item), class: "btn btn-primary" %>
+                      </p>
+                  </div>
+              </div>
+              <% end %>
+          </div>
+          <p>
+            <%= link_to "Edit Action Plan", edit_actionplan_path(@actionplan), class: "btn btn-primary" %>
+          </p>
         </div>
     </div>
-    <br/>
 </div>
 
 <div class="new_actionitem">
-    <%= form_for Actionitem.new, url: actionitems_path do |f| %>
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+          <h3 class="panel-title">
+              New Action Plan Item
+          </h3>
+      </div>
+      <div class="panel-body">
+        <%= form_for Actionitem.new, url: actionitems_path do |f| %>
 
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+        <div class="input-group">
+            <%= f.label :name, hidden: true %>
+            <span class="input-group-addon" id="basic-addon1">Name</span>
+            <%= f.text_field :name, type: "text", class: "form-control", placeholder: "Action Item Name" %>
+            <br/>
+        </div>
 
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+        <div class="input-group">
+            <%= f.label :description, hidden: true %>
+            <span class="input-group-addon" id="basic-addon1">Description</span>
+            <%= f.text_field :description, type: "text", class: "form-control", placeholder: "Description" %>
+            <br/>
+        </div>
 
-    <%= f.label :target_completion_date %>
-    <%= f.datetime_select :target_completion_date, order: [:day, :month, :year, :hour, :minute] %>
+        <div class="input-group">
+            <%= f.label :target_completion_date, hidden: true %>
+            <span class="input-group-addon" id="basic-addon1">Date of Meeting</span>
+            <%= f.datetime_select :target_completion_date, order: [:day, :month, :year, :hour, :minute], type: "text", class: "form-control" %>
+            <br/>
+        </div>
 
-    <%= f.hidden_field(:actionplan_id, value: @actionplan.id) %>
+        <%= f.hidden_field(:actionplan_id, value: @actionplan.id) %>
 
-    <%= f.fields_for :actionitemassignees do |ff| %>
-    <% User.all.each do |user| %>
-    <label>
-        <%= check_box_tag "actionitem[user_ids][]", user.id %>
-        <%= user.name %>
-    </label>
-    <% end %>
-    <% end %>
+        <%= f.fields_for :actionitemassignees do |ff| %>
+        <div class="actionitem_assignees">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Action Item Assignees</h3>
+                </div>
+                <div class="panel-body scroll-area">
 
-    <%= f.submit "Create Action Item" %>
-    <% end %>
+
+                  <% User.all.each do |user| %>
+                  <label>
+                      <%= check_box_tag "actionitem[user_ids][]", user.id %>
+                      <%= user.name %>
+                  </label>
+                  <br/>
+                  <% end %>
+                  <% end %>
+                </div>
+            </div>
+          </div>
+          <%= f.submit "Create Action Item", class: "btn btn-primary" %>
+          <% end %>
+      </div>
+  </div>
+</div>
+
+
+
+
 </div>

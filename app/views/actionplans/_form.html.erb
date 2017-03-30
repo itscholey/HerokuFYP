@@ -1,0 +1,66 @@
+<div class="<%= yield(:view_class) %>">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Action Plan Details</h3>
+        </div>
+        <div class="panel-body">
+            <%= form_for @actionplan do |f| %>
+
+              <div class="input-group">
+                  <%= f.label :title, hidden: true %>
+                  <span class="input-group-addon" id="basic-addon1">Title</span>
+                  <%= f.text_field :title, type: "text", class: "form-control", placeholder: "Title of Action Plan" %>
+                  <br/>
+              </div>
+
+              <div class="input-group">
+                  <%= f.label :description, hidden: true %>
+                  <span class="input-group-addon" id="basic-addon1">Description</span>
+                  <%= f.text_area :description, type: "textarea", class: "form-control", placeholder: "Action Plan Description" %>
+                  <br/>
+              </div>
+
+              <div class="actionplan_students">
+                  <div class="panel panel-primary">
+                      <div class="panel-heading">
+                          <h3 class="panel-title">Regarding Student:</h3>
+                      </div>
+                      <div class="panel-body scroll-area">
+
+                        <%= f.label :student_id, hidden: true %>
+                        <% User.all.each do |user| %>
+                        <label>
+                            <%= radio_button_tag "actionplan[student_id]", user.id %>
+                            <%= user.name %>
+                        </label>
+                        <br/>
+                        <% end %>
+                      </div>
+                  </div>
+                </div>
+
+
+                <div class="actionplan_supervisor">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Action Plan Supervisor:</h3>
+                        </div>
+                        <div class="panel-body scroll-area">
+                          <%= f.label :supervisor_id, hidden: true %>
+                          <% User.all.each do |user| %>
+                          <label>
+                              <%= radio_button_tag "actionplan[supervisor_id]", user.id %>
+                              <%= user.name %>
+                          </label>
+                          <br/>
+                          <% end %>
+
+                        </div>
+                    </div>
+                  </div>
+
+            <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+            <% end %>
+        </div>
+    </div>
+</div>

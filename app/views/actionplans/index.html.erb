@@ -1,15 +1,14 @@
-<h1>Actionplan#index</h1>
-<p>Find me in app/views/actionplans/index.html.erb</p>
-
-<%= link_to "Create Action Plan", new_actionplan_path %>
+<% provide(:title, "Action Plans") %>
+<% provide(:pagetitle, "Action Plans") %>
 
 <% @actionplans.each do |actionplan| %>
-  <div class="panel panel-info">
+  <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title"><%= link_to actionplan.title, actionplan %></h3>
     </div>
     <div class="panel-body">
-      Regarding: <%= actionplan.student.name %>
+      <p>Regarding: <%= actionplan.student.name %></p>
+      <p>Action Items: <%= actionplan.actionitems.count %></p>
     </div>
   </div>
   <br/>
