@@ -17,11 +17,23 @@ class ActionplansController < ApplicationController
   end
 
   def edit
+    @actionplan = Actionplan.find(params[:id])
+  end
+
+  def update
+    @actionplan = Actionplan.find(params[:id])
+    if @actionplan.update_attributes(actionplan_params)
+      flash[:success] = "Action Plan updated."
+      redirect_to @actionplan
+    else
+      render 'edit'
+    end
   end
 
   def show
     @actionplan = Actionplan.find(params[:id])
   end
+
 
   private
 
