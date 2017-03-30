@@ -28,7 +28,7 @@
     margin-bottom: 25px;
   }
 
-.back-button {
+.task-button {
   margin-bottom: 25px;
 }
 
@@ -87,6 +87,18 @@
 
 // subjects
 
+.enroled_students .scroll-area, .lessons .scroll-area {
+  height: 100%;
+  margin-bottom: 0;
+}
+
+.enroled_studens .scroll-area {
+  max-height: 200px;
+}
+
+.lessons .scroll-area {
+  max-height: 400px;
+}
 // users
 
 // welcome
