@@ -22,6 +22,9 @@
                 <%= @subject.classGroup %></p>
             <p>Number of Lessons:
                 <%= @subject.lessons.count %></p>
+            <p>
+              <%= link_to "Edit Subject", edit_subject_path(@subject), class: "btn btn-primary" %>
+            </p>
         </div>
     </div>
 </div>
