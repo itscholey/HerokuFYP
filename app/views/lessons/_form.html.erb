@@ -1,26 +1,55 @@
-<%= form_for @lesson do |f| %>
-  <% if @lesson.errors.any? %>
-    <div id="error_description">
-      The form contains <%= pluralize(@lesson.errors.count, "error") %>.
-      <ul>
-        <% @lesson.errors.full_messages.each do |m| %>
-          <li><%= m %></li>
-        <% end %>
-      </ul>
+<div class="<%= yield(:view_class) %>">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Lesson Details
+            </h3>
+        </div>
+        <div class="panel-body">
+          <%= form_for @lesson do |f| %>
+            <% if @lesson.errors.any? %>
+              <div id="error_description">
+                The form contains <%= pluralize(@lesson.errors.count, "error") %>.
+                <ul>
+                  <% @lesson.errors.full_messages.each do |m| %>
+                    <li><%= m %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          <div class="input-group">
+              <%= f.label :name, hidden: true %>
+              <span class="input-group-addon" id="basic-addon1">Lesson Name</span>
+              <%= f.text_field :name, type: "text", class: "form-control", placeholder: "Lesson Name" %>
+              <br/>
+          </div>
+
+          <div class="input-group">
+              <%= f.label :date, hidden: true %>
+              <span class="input-group-addon" id="basic-addon1">Time and Date</span>
+              <%= f.datetime_select :date, { order: [:day, :month, :year, :hour, :minute] }, { type: "date" } %>
+              <br/>
+          </div>
+
+          <div class="input-group">
+              <%= f.label :subject_name, hidden: true %>
+              <span class="input-group-addon" id="basic-addon1">Subject Name</span>
+              <%= f.text_field :subject_name, type: "text", class: "form-control", value: Subject.find(session[:subject_id]).name, readonly: "readonly" %>
+            <br/>
+          </div>
+
+          <%= f.hidden_field(:subject_id, value: session[:subject_id]) %>
+
+          <div class="input-group">
+              <%= f.label :teacher_name, hidden: true %>
+              <span class="input-group-addon" id="basic-addon1">Teacher Name</span>
+              <%= f.text_field :teacher_name, type: "text", class: "form-control", value: Subject.find(session[:subject_id]).user.name, readonly: "readonly" %>
+            <br/>
+          </div>
+
+          <br/>
+          <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+          <% end %>
+        </div>
     </div>
-  <% end %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <br/>
-
-  <%= f.label :date %>
-  <%= f.datetime_select :date, order: [:day, :month, :year, :hour, :minute] %>
-  <br/>
-
-  <%= f.label :subject_id %>
-  <%= f.text_field :subject_id %>
-
-  <br/>
-  <%= f.submit yield(:button_text) %>
-<% end %>
+</div>

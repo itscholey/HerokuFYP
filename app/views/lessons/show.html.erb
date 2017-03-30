@@ -1,7 +1,20 @@
-<h1>Lessons#show</h1>
-<p>Find me in app/views/lessons/show.html.erb</p>
-<%= link_to "Back to #{@lesson.subject.name}", @lesson.subject %>
+<% provide(:title, "#{@lesson.name} for #{@lesson.subject.name}") %>
+<h1><%= @lesson.name %></h1>
+<%= link_to "Back to #{@lesson.subject.name}", @lesson.subject, class: "btn btn-primary back-button" %>
 
-<p><%= @lesson.name %></p>
-<p><%= @lesson.subject.name %></p>
-<p><%= @lesson.subject.user.name %></p>
+<div class="lesson_details">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Lesson Details
+            </h3>
+        </div>
+        <div class="panel-body">
+          <p>Lesson Name: <%= @lesson.name %></p>
+          <p>Subject Name: <%= @lesson.subject.name %></p>
+          <p>Teacher: <%= @lesson.subject.user.name %></p>
+          <p>Date: <%= format_datetime(@lesson.date) %></p>
+          <%= link_to "Edit Lesson", edit_lesson_path(@lesson), class: "btn btn-primary" %>
+        </div>
+    </div>
+</div>

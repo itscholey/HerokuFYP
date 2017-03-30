@@ -1,7 +1,9 @@
-<% provide(:title, "Edit Lesson") %>
+<% provide(:title, "Edit #{@lesson.name}") %>
 <% provide(:button_text, "Save Changes") %>
+<% provide(:view_class, "edit_lesson") %>
 
-<h1>Lessons#edit</h1>
-<p>Find me in app/views/lessons/edit.html.erb</p>
+<h1>Edit <%= @lesson.name %></h1>
+
+<%= link_to "Back to #{ @lesson.name}", @lesson, class: "btn btn-primary back-button" %>
 
 <%= render "form" %>

@@ -3,6 +3,7 @@
 <%= link_to "Back to Subjects", subjects_path %>
 
 <p><%= link_to "Create a New Lesson", new_lesson_path %><p>
+  <% session[:subject_id] = @subject.id %>
 <p><%= link_to "Enrol Students", new_enrolment_path %></p>
 
 <h2><%= @subject.name %></h2>
