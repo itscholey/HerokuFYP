@@ -1,4 +1,8 @@
-<% provide(:title, "Edit Profile") %>
+<% provide(:title, "Edit User") %>
+<% provide(:pagetitle, "Edit #{@user.name}'s Details'") %>
 <% provide(:button_text, "Save Changes") %>
+<% provide(:view_class, "edit_user") %>
+
+<%= link_to "Back to #{@user.name}'s Profile'", @users, class: "btn btn-primary task-button" %>
 
 <%= render "form" %>

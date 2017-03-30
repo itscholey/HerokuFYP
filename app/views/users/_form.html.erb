@@ -1,32 +1,84 @@
-<%= form_for :user, url: users_path do |f| %>
-  <%= render 'shared/error_messages', object: @user %>
+<div class="<%= yield(:view_class) %>">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                User Details
+            </h3>
+        </div>
+        <div class="panel-body">
+            <%= form_for @user do |f| %>
+            <% if @user.errors.any? %>
+            <div id="error_description">
+                The form contains
+                <%= pluralize(@user.errors.count, "error") %>.
+                <ul>
+                    <% @user.errors.full_messages.each do |m| %>
+                    <li><%= m %></li>
+                    <% end %>
+                </ul>
+            </div>
+            <% end %>
 
-  <%= f.label :username %>
-  <%= f.text_field :username %>
+            <div class="input-group">
+                <%= f.label :username, hidden: true %>
+                <span class="input-group-addon" id="basic-addon1">Username</span>
+                <%= f.text_field :username, type: "text", class: "form-control", placeholder: "Username" %>
+                <br/>
+            </div>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+            <div class="input-group">
+                <%= f.label :name, hidden: true %>
+                <span class="input-group-addon" id="basic-addon1">User Name</span>
+                <%= f.text_field :name, type: "text", class: "form-control", placeholder: "Full Name of User" %>
+                <br/>
+            </div>
 
-  <%= f.label :email %>
-  <%= f.email_field :email %>
+            <div class="input-group">
+                <%= f.label :email, hidden: true %>
+                <span class="input-group-addon" id="basic-addon1">Email</span>
+                <%= f.text_field :email, type: "text", class: "form-control", placeholder: "example@example.com" %>
+                <br/>
+            </div>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+            <div class="input-group">
+                <%= f.label :password, hidden: true %>
+                <span class="input-group-addon" id="basic-addon1">Password</span>
+                <%= f.password_field :password, type: "password", class: "form-control" %>
+                <br/>
+            </div>
 
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
+            <div class="input-group">
+                <%= f.label :password_confirmation, hidden: true %>
+                <span class="input-group-addon" id="basic-addon1">Confirm Password</span>
+                <%= f.password_field :password_confirmation, type: "password", class: "form-control" %>
+                <br/>
+            </div>
 
-  <% if current_user.role?(:admin) and params[:action] == "new" %>
-    <%= f.fields_for :roles do |ff| %>
-      <% Role.all.each do |role| %>
-         <label>
-            <%= radio_button_tag "user[role_ids][]", role.id %>
-            <%= role.name %>
-         </label>
-      <% end %>
-    <% end %>
-  <% end %>
+            <% if current_user.role?(:admin) and params[:action] == "new" %>
+              <%= f.fields_for :roles do |ff| %>
+              <div class="user_roles">
+                  <div class="panel panel-primary">
+                      <div class="panel-heading">
+                          <h3 class="panel-title">User Type</h3>
+                      </div>
+                      <div class="panel-body">
 
-  <br/>
-  <%= f.submit yield(:button_text) %>
-<% end %>
+                          <% Role.all.each do |role| %>
+                          <label>
+                              <%= radio_button_tag "user[role_ids][]", role.id %>
+                              <%= role.name %>
+                          </label>
+                          <br/>
+                          <% end %>
+
+                      </div>
+                  </div>
+              </div>
+              <% end %>
+            <% end %>
+
+            <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+            <% end %>
+        </div>
+    </div>
+</div>

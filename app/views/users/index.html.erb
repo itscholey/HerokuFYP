@@ -1,22 +1,27 @@
 <% provide(:title, "Users") %>
-<h1>
-    Users
-</h1>
-<p><%= link_to "Create New User", new_user_path %></p>
+<% provide(:pagetitle, "Users") %>
+
+<%= link_to "Create New User", new_user_path, class: "btn btn-primary task-button" %>
 
 <% @users.each do |user| %>
-<div class="panel panel-info">
+<div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title"><%= link_to user.name, user %></h3>
     </div>
     <div class="panel-body">
-        <ul>
-            <li>Username:
-                <%= user.username %>
-                <% user.roles.each do |role| %>
-            <li><%= role.name %></li>
+        <p>Username:
+            <%= user.username %></p>
+        <p>User Type:
+            <% @count = user.roles.count %>
+            <% @i = 1 %>
+            <% user.roles.each do |role| %>
+              <%= role.name %>
+              <% if @i < @count %>
+                ,
+              <% end %>
+            <% @i += 1 %>
             <% end %>
-            <ul></div>
-        </div>
-        <br/>
+        </p>
+    </div>
+</div>
 <% end %>

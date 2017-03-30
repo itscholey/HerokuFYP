@@ -1,5 +1,8 @@
 <% provide(:title, "Create User") %>
+<% provide(:pagetitle, "Create a New User") %>
 <% provide(:button_text, "Create User") %>
-<h1>New User</h1>
+<% provide(:view_class, "new_user") %>
+
+<%= link_to "Back to Users", users_path, class: "btn btn-primary task-button" %>
 
 <%= render "form" %>

@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     #authorize @user
     if @user.save
-      render :index
+      render :show
     else
       render :new
     end

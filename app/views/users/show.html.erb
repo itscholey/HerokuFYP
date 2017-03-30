@@ -1,16 +1,68 @@
 <% provide(:title, "#{@user.name}'s Profile") %>
-<p><%= link_to "Back to Users", users_path %></p>
+<% provide(:pagetitle, "#{@user.name}'s Profile") %>
 
-<h1>User: <%= @user.name %></h1>
-<h2>Roles:</h2>
-<ul>
-  <% @user.roles.each do |r| %>
-    <li><%= r.name %></li>
-  <% end %>
-</ul>
-<h2>Subjects:</h2>
-<ul>
-  <% @user.enrolments(@user).each do |e| %>
-  <li><%= Subject.find(e.subject_id).name %></li>
-<% end %>
-</ul>
+<p><%= link_to "Back to Users", users_path, class: "btn btn-primary task-button" %></p>
+
+<div class="user_details">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                User Details
+            </h3>
+        </div>
+        <div class="panel-body">
+            <p>Username: <%= @user.username %></p>
+            <p>Email: <%= @user.email %></p>
+            <p>User Type:
+                <% count = @user.roles.count %>
+                <% i = 1 %>
+                <% @user.roles.each do |role| %>
+                <%= role.name %>
+                <% if i < count %>
+                ,
+                <% end %>
+                <% i += 1 %>
+                <% end %></p>
+
+            <% unless @user.role?(:parent) %>
+            <div class="user_subjects">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <% if @user.role?(:teacher) or @user.role?(:admin) %>
+                            Subjects Taught
+                        <% else %>
+                            Subjects Enroled On
+                            <% end %>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <% if @user.role?(:teacher) or @user.role?(:admin) %>
+                        <% subjects = Subject.where(user_id: @user.id) %>
+                        <% if subjects.count > 0 %>
+                        <% subjects.each do |subject| %>
+                        <p><%= subject.name %></p>
+                        <% end %>
+                    <% else %>
+                        No Subjects.
+                        <% end %>
+                    <% else %>
+                        <% subjects = @user.subjects %>
+                        <% if subjects.count > 0 %>
+                        <% subjects.each do |subject| %>
+                        <p><%= subject.name %></p>
+                        <% end %>
+                    <% else %>
+                        No Subjects.
+                        <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+            <p>
+              <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-primary" %>
+            </p>
+        </div>
+    </div>
+</div>
