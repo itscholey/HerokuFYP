@@ -1,24 +1,26 @@
 <% provide(:title, "Meeting") %>
+<% provide(:pagetitle, "Meeting Subject: #{@meeting.subject}") %>
 
-<h1>Meetings#show</h1>
-<p>Find me in app/views/meetings/show.html.erb</p>
-<%= link_to "Back to Meetings", meetings_path %>
+<%= link_to "Back to Meetings", meetings_path, class: "btn btn-primary task-button" %>
 
 
-<div class="panel panel-info">
+<div class="panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title"><%= @meeting.subject %></h3>
+    <h3 class="panel-title">Meeting Details</h3>
   </div>
   <div class="panel-body">
-    Date: <%= @meeting.date %>
-    <br/>
-    Location: <%= @meeting.location %>
-    <br/>
-    Agenda: <%= @meeting.agenda %>
-    <ul>
-      <% @meeting.attendees.each do |a| %>
-        <li><%= a.user.name %></li>
-      <% end %>
-    </ul>
+    <p>Date: <%= format_datetime(@meeting.date) %></p>
+    <p>Location: <%= @meeting.location %></p>
+    <p>Agenda: <%= @meeting.agenda %></p>
+    <p>Attendees:
+      <ul>
+        <% @meeting.attendees.each do |a| %>
+          <li><%= a.user.name %></li>
+        <% end %>
+      </ul>
+    </p>
+    <p>
+      <%= link_to "Edit Meeting", edit_meeting_path(@meeting), class: "btn btn-primary" %>
+    </p>
   </div>
 </div>

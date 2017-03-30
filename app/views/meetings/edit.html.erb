@@ -1,7 +1,7 @@
 <% provide(:title, "Edit Meeting") %>
 <% provide(:button_text, "Save Changes") %>
+<% provide(:pagetitle, "Edit Meeting: #{@meeting.subject}") %>
 
-<h1>Meetings#edit</h1>
-<p>Find me in app/views/meetings/edit.html.erb</p>
+<%= link_to "Back to Meeting: #{@meeting.subject}", @meeting, class: "btn btn-primary task-button" %>
 
 <%= render "form" %>

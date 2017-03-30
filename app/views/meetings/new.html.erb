@@ -1,7 +1,7 @@
 <% provide(:title, "Create Meeting") %>
 <% provide(:button_text, "Create Meeting") %>
+<% provide(:pagetitle, "Create a New Meeting") %>
 
-<h1>Meetings#new</h1>
-<p>Find me in app/views/meetings/new.html.erb</p>
+<%= link_to "Back to Meetings", meetings_path, class: "btn btn-primary task-button" %>
 
 <%= render "form" %>

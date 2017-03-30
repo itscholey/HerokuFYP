@@ -69,6 +69,18 @@
 // lessons
 
 // meetings
+.new_meeting textarea {
+  resize: none;
+  height: 200px;
+}
+
+.meeting_attendees scroll-area {
+  max-height: 200px;
+}
+
+.meeting_attendees {
+  margin-top: 25px;
+}
 
 // messages
 

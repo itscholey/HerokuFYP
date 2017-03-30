@@ -1,38 +1,72 @@
-<%= form_for @meeting do |f| %>
-  <% if @meeting.errors.any? %>
-    <div id="error_description">
-      The form contains <%= pluralize(@meeting.errors.count, "error") %>.
-      <ul>
-        <% @meeting.errors.full_messages.each do |m| %>
-          <li><%= m %></li>
-        <% end %>
-      </ul>
+<div class="<%= yield(:view_class) %>">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Meeting Details</h3>
+        </div>
+        <div class="panel-body">
+
+            <%= form_for @meeting do |f| %>
+            <% if @meeting.errors.any? %>
+            <div id="error_description">
+                The form contains
+                <%= pluralize(@meeting.errors.count, "error") %>.
+                <ul>
+                    <% @meeting.errors.full_messages.each do |m| %>
+                    <li><%= m %></li>
+                    <% end %>
+                </ul>
+            </div>
+            <% end %>
+
+            <div class="input-group">
+                <%= f.label :subject, hidden: true %>
+                <span class="input-group-addon" id="basic-addon1">Subject</span>
+                <%= f.text_field :subject, type: "text", class: "form-control", placeholder: "Meeting Subject" %>
+                <br/>
+            </div>
+
+            <div class="input-group">
+                <%= f.label :date, hidden: true %>
+                <span class="input-group-addon" id="basic-addon1">Date of Meeting</span>
+                <%= f.datetime_select :date, order: [:day, :month, :year, :hour, :minute], type: "text", class: "form-control", placeholder: "Subject Name" %>
+                <br/>
+            </div>
+
+            <div class="input-group">
+                <%= f.label :location, hidden: true %>
+                <span class="input-group-addon" id="basic-addon1">Location</span>
+                <%= f.text_field :location, type: "text", class: "form-control", placeholder: "Location" %>
+                <br/>
+            </div>
+
+            <div class="input-group">
+                <%= f.label :agenda, hidden: true %>
+                <span class="input-group-addon" id="basic-addon1">Agenda</span>
+                <%= f.text_area :agenda, type: "textarea", class: "form-control", placeholder: "The agenda of the meeting will be as follows..." %>
+                <br/>
+            </div>
+
+            <%= f.fields_for :attendees do |ff| %>
+            <div class="meeting_attendees">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Meeting Attendees</h3>
+                    </div>
+                    <div class="panel-body scroll-area">
+                      <% User.all.each do |user| %>
+                      <label>
+                          <%= check_box_tag "meeting[user_ids][]", user.id %>
+                          <%= user.name %>
+                      </label>
+                      <br/>
+                      <% end %>
+                    </div>
+                </div>
+              </div>
+            <% end %>
+            <br/>
+            <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+            <% end %>
+        </div>
     </div>
-  <% end %>
-
-  <%= f.label :subject %>
-  <%= f.text_field :subject %>
-  <br/>
-
-  <%= f.label :date %>
-  <%= f.datetime_select :date, order: [:day, :month, :year, :hour, :minute] %>
-  <br/>
-
-  <%= f.label :location %>
-  <%= f.text_field :location %>
-
-  <%= f.label :agenda %>
-  <%= f.text_area :agenda %>
-
-  <%= f.fields_for :attendees do |ff| %>
-    <% User.all.each do |user| %>
-       <label>
-          <%= check_box_tag "meeting[user_ids][]", user.id %>
-          <%= user.name %>
-       </label>
-    <% end %>
-  <% end %>
-
-  <br/>
-  <%= f.submit yield(:button_text) %>
-<% end %>
+</div>
