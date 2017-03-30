@@ -17,7 +17,7 @@
         <%= @recipient_str %></h1>
 </div>
 
-<%= link_to "Back to Conversations", conversations_path, class: "btn btn-primary back-button" %>
+<%= link_to "Back to Conversations", conversations_path, class: "btn btn-primary task-button" %>
 
 <div class="messages scroll-area">
   <% Message.where(conversation_id: @conversation.id).each do |m| %>

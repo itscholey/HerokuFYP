@@ -3,6 +3,6 @@
 <% provide(:view_class, "new_lesson") %>
 
 <h1>Create a New Lesson for <%= Subject.find(session[:subject_id]).name %></h1>
-<%= link_to "Back to #{ Subject.find(session[:subject_id]).name}", Subject.find(session[:subject_id]), class: "btn btn-primary back-button" %>
+<%= link_to "Back to #{ Subject.find(session[:subject_id]).name}", Subject.find(session[:subject_id]), class: "btn btn-primary task-button" %>
 
 <%= render "form" %>

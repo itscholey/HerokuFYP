@@ -4,6 +4,8 @@
     <h1>Create a New Conversation</h1>
 </div>
 
+<%= link_to "Back to Conversations", conversations_path, class: "btn btn-primary task-button" %>
+
   <div class="new_conversation">
     <%= form_for @conversation do |f| %>
         <div class="panel panel-primary">
