@@ -1,8 +1,7 @@
 <% provide(:title, "Edit #{@lesson.name}") %>
 <% provide(:button_text, "Save Changes") %>
 <% provide(:view_class, "edit_lesson") %>
-
-<h1>Edit <%= @lesson.name %></h1>
+<% provide(:pagetitle, "Edit #{@lesson.name}") %>
 
 <%= link_to "Back to #{ @lesson.name}", @lesson, class: "btn btn-primary task-button" %>
 

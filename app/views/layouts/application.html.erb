@@ -63,6 +63,9 @@
         <div class="alert alert-<%= message_type %>"><%= message %></div>
       <% end %>
 
+      <div class="title">
+          <h1><%= yield(:pagetitle) %></h1>
+      </div>
       <%= yield %>
     <!--
       <%= session.inspect %>

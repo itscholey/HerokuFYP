@@ -1,5 +1,6 @@
 <% provide(:title, "#{@lesson.name} for #{@lesson.subject.name}") %>
-<h1><%= @lesson.name %></h1>
+<% provide(:pagetitle, "#{@lesson.name}") %>
+
 <%= link_to "Back to #{@lesson.subject.name}", @lesson.subject, class: "btn btn-primary task-button" %>
 
 <div class="lesson_details">

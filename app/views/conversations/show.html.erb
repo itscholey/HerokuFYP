@@ -10,12 +10,8 @@
 <% @i += 1 %>
 <% end %>
 <% provide(:title, "Conversation with: #{@recipient_str}") %>
+<% provide(:pagetitle, "Conversation with: #{@recipient_str}") %>
 
-<div class="title">
-    <h1>Conversation with:
-        <br/>
-        <%= @recipient_str %></h1>
-</div>
 
 <%= link_to "Back to Conversations", conversations_path, class: "btn btn-primary task-button" %>
 

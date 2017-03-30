@@ -23,9 +23,7 @@
   }
 
   .scroll-area {
-    height:calc(200px);
     overflow-y:scroll;
-    margin-bottom: 25px;
   }
 
 .task-button {
@@ -47,8 +45,8 @@
 }
 
 .messages {
-  height:calc(500px);
-  overflow-y:scroll;
+  max-height:500px;
+  margin-bottom: 25px;
 }
 
 .new_message textarea {
@@ -86,11 +84,6 @@
 
 
 // subjects
-
-.enroled_students .scroll-area, .lessons .scroll-area {
-  height: 100%;
-  margin-bottom: 0;
-}
 
 .enroled_studens .scroll-area {
   max-height: 200px;
