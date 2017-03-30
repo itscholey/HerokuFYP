@@ -1,7 +1,8 @@
-<% provide(:title, "Create User") %>
-<% provide(:button_text, "Create User") %>
+<% provide(:title, "Create Subject") %>
+<% provide(:button_text, "Create Subject") %>
+<% provide(:view_class, "new_subject") %>
+<% provide(:pagetitle, "Create a New Subject") %>
 
-<h1>Subjects#new</h1>
-<p>Find me in app/views/subjects/new.html.erb</p>
+<%= link_to "Back to Subjects", subjects_path, class: "btn btn-primary task-button" %>
 
 <%= render "form" %>

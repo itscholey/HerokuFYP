@@ -1,8 +1,8 @@
 <% provide(:title, "Edit Subject") %>
 <% provide(:button_text, "Save Changes") %>
+<% provide(:view_class, "edit_subject") %>
+<% provide(:pagetitle, "Edit #{@subject.name}") %>
 
-
-<h1>Subjects#edit</h1>
-<p>Find me in app/views/subjects/edit.html.erb</p>
+<%= link_to "Back to #{@subject.name}", @subject, class: "btn btn-primary task-button" %>
 
 <%= render "form" %>

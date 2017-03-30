@@ -1,24 +1,68 @@
-<h1>Subjects#show</h1>
-<p>Find me in app/views/subjects/show.html.erb</p>
-<%= link_to "Back to Subjects", subjects_path %>
+<% provide(:title, "#{@subject.name}") %>
+<% provide(:pagetitle, "#{@subject.name}") %>
 
-<p><%= link_to "Create a New Lesson", new_lesson_path %><p>
+<div class="task-buttons">
+  <%= link_to "Back to Subjects", subjects_path, class: "btn btn-primary task-button" %>
+  <%= link_to "Create a New Lesson", new_lesson_path, class: "btn btn-primary task-button" %>
   <% session[:subject_id] = @subject.id %>
-<p><%= link_to "Enrol Students", new_enrolment_path %></p>
+  <%= link_to "Enrol Students", new_enrolment_path, class: "btn btn-primary task-button" %>
+</div>
 
-<h2><%= @subject.name %></h2>
-<p><%= User.find(@subject.user_id).name %></p>
-<p><%= @subject.classGroup %></p>
-
-<h3>Enroled Students</h3>
-<% @subject.users.each do |user| %>
-  <p><%= user.name %></p>
-<% end %>
-
-<% Lesson.where(subject_id: @subject.id).each do |lesson| %>
-  <div class="panel panel-info">
-    <div class="panel-heading">
-      <h3 class="panel-title"><%= link_to lesson.name, lesson %></h3>
+<div class="subject_details">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Subject Details
+            </h3>
+        </div>
+        <div class="panel-body">
+            <p>Teacher:
+                <%= User.find(@subject.user_id).name %></p>
+            <p>Class Group:
+                <%= @subject.classGroup %></p>
+            <p>Number of Lessons:
+                <%= @subject.lessons.count %></p>
+        </div>
     </div>
-  </div>
-<% end %>
+</div>
+
+<div class="enroled_students">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Enroled Students
+            </h3>
+        </div>
+        <div class="panel-body scroll-area">
+            <% @subject.users.each do |user| %>
+            <p><%= user.name %></p>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<div class="lessons">
+    <div class="panel panel-primary subject-lessons-panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">Lessons for
+                <%= @subject.name %></h3>
+        </div>
+        <div class="panel-body scroll-area">
+          <% Lesson.where(subject_id: @subject.id).each do |lesson| %>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <%= link_to lesson.name, lesson %>
+                    </h3>
+                </div>
+                <div class="panel-body lesson-outline">
+                    <p>On:
+                        <%= format_datetime(lesson.date) %></p>
+                </div>
+            </div>
+
+            <% end %>
+        </div>
+    </div>
+</div>
