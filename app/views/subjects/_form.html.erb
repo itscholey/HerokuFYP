@@ -40,6 +40,27 @@
                 <br/>
             </div>
 
+            <%= f.fields_for :users do |ff| %>
+            <div class="subject_students">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Enrol Students</h3>
+                    </div>
+                    <div class="panel-body scroll-area">
+                      <% User.all.each do |user| %>
+                        <% if user.role?(:student) %>
+                          <label>
+                              <%= check_box_tag "subject[user_ids][]", user.id %>
+                              <%= user.name %>
+                          </label>
+                          <br/>
+                        <% end %>
+                      <% end %>
+                    </div>
+                </div>
+              </div>
+            <% end %>
+
             <br/>
             <%= f.submit yield(:button_text), class: "btn btn-primary" %>
           <% end %>

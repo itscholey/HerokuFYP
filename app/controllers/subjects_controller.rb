@@ -45,6 +45,6 @@ class SubjectsController < ApplicationController
 
   private
     def subject_params
-      params.require(:subject).permit(:name, :classGroup, :user_id)
+      params.require(:subject).permit(:name, :classGroup, :user_id, user_ids: [])
     end
 end
