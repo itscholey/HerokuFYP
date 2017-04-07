@@ -34,6 +34,8 @@ gem 'simple_calendar'
 
 gem 'pundit'
 
+gem 'carrierwave'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
