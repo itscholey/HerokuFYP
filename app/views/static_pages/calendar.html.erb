@@ -1,6 +1,8 @@
-<h1>StaticPages#calendar</h1>
-<p>Find me in app/views/static_pages/calendar.html.erb</p>
+<% provide(:title, "Calendar") %>
+<% provide(:pagetitle, "Your Calendar") %>
 
+
+<h1>Meetings</h1>
 <%= month_calendar events: Meeting.all do |date, meetings| %>
   <%= date.day %>
   <% meetings.each do |meeting| %>
@@ -10,6 +12,8 @@
 <% end %>
 
 
+<br/>
+<h1>Action Items</h1>
 <%= month_calendar events: Actionitem.all do |date, items| %>
   <%= date.day %>
   <% items.each do |item| %>
