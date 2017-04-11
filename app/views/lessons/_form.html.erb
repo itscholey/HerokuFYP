@@ -6,6 +6,7 @@
             </h3>
         </div>
         <div class="panel-body">
+          <% uploader = LessonWorkUploader.new %>
           <%= form_for @lesson do |f| %>
             <% if @lesson.errors.any? %>
               <div id="error_description">
@@ -44,6 +45,13 @@
               <%= f.label :teacher_name, hidden: true %>
               <span class="input-group-addon" id="basic-addon1">Teacher Name</span>
               <%= f.text_field :teacher_name, type: "text", class: "form-control", value: Subject.find(session[:subject_id]).user.name, readonly: "readonly" %>
+            <br/>
+          </div>
+
+          <div class="input-group">
+              <%= f.label :lesson_work, hidden: true %>
+              <span class="input-group-addon" id="basic-addon1">Lesson Work</span>
+              <%= f.file_field :lesson_work, type: "file", class: "form-control" %>
             <br/>
           </div>
 
