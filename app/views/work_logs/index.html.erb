@@ -26,6 +26,13 @@
                   No
                 <% end %>
               </p>
+              <p>Description of Work:
+                <% if worklog.description.nil? %>
+                  None given.
+                <% else %>
+                  <%= worklog.description %>
+                <% end %>
+              </p>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 <% provide(:title, "New Work Log") %>
 <% provide(:pagetitle, "Create a New Work Log Entry") %>
 
-<div class="log_details">
+<div class="new_worklog">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">
@@ -49,6 +49,13 @@
                </label>
 
                <br/>
+            </div>
+
+            <div class="input-group">
+                <%= f.label :description, hidden: true %>
+                <span class="input-group-addon" id="basic-addon1">Description</span>
+                <%= f.text_area :description, type: "textarea", class: "form-control" %>
+              <br/>
             </div>
 
 

@@ -22,6 +22,6 @@ class WorkLogsController < ApplicationController
   private
 
   def worklog_params
-    params.require(:work_log).permit(:student_id, :lesson_id, :date, :time_spent, :in_school)
+    params.require(:work_log).permit(:student_id, :lesson_id, :date, :time_spent, :in_school, :description)
   end
 end
