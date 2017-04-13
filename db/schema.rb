@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170411120549) do
+ActiveRecord::Schema.define(version: 20170412123150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,18 @@ ActiveRecord::Schema.define(version: 20170411120549) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "work_logs", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "lesson_id"
+    t.datetime "date"
+    t.integer  "time_spent"
+    t.boolean  "in_school"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "work_logs", ["lesson_id"], name: "index_work_logs_on_lesson_id", using: :btree
+
   add_foreign_key "actionitemassignees", "actionitems"
   add_foreign_key "actionitemassignees", "users"
   add_foreign_key "actionitems", "actionplans"
@@ -183,4 +195,6 @@ ActiveRecord::Schema.define(version: 20170411120549) do
   add_foreign_key "recipients", "conversations", on_delete: :cascade
   add_foreign_key "recipients", "users", on_delete: :cascade
   add_foreign_key "subjects", "users"
+  add_foreign_key "work_logs", "lessons"
+  add_foreign_key "work_logs", "users", column: "student_id"
 end

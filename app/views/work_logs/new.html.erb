@@ -1,0 +1,62 @@
+<% provide(:title, "New Work Log") %>
+<% provide(:pagetitle, "Create a New Work Log Entry") %>
+
+<div class="log_details">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Work Log Entry Details
+            </h3>
+        </div>
+        <div class="panel-body">
+            <%= form_for @worklog do |f| %>
+              <% if @worklog.errors.any? %>
+                <div id="error_description">
+                  The form contains <%= pluralize(@worklog.errors.count, "error") %>.
+                  <ul>
+                    <% @worklog.errors.full_messages.each do |m| %>
+                      <li><%= m %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+
+            <div class="input-group">
+                <%= f.label :lesson_id, hidden: true %>
+                <span class="input-group-addon" id="basic-addon1">Lesson</span>
+                <%= f.text_field :lesson_id, type: "text", class: "form-control", placeholder: "Lesson ID" %>
+                <br/>
+            </div>
+
+            <div class="input-group">
+                <%= f.label :date, hidden: true %>
+                <span class="input-group-addon" id="basic-addon1">Time and Date</span>
+                <%= f.datetime_select :date, { order: [:day, :month, :year, :hour, :minute] }, { type: "date" } %>
+                <br/>
+            </div>
+
+            <div class="input-group">
+                <%= f.label :time_spent, hidden: true %>
+                <span class="input-group-addon" id="basic-addon1">Time Spent in Minutes</span>
+                <%= f.text_field :time_spent, type: "text", class: "form-control" %>
+              <br/>
+            </div>
+
+            <div class="input-group">
+               <label>
+                    <%= check_box_tag "work_log[in_school]", true %>
+                    In School?
+               </label>
+
+               <br/>
+            </div>
+
+
+            <%= f.hidden_field(:student_id, value: current_user.id) %>
+
+            <br/>
+            <%= f.submit "Create Work Log Entry", class: "btn btn-primary" %>
+            <% end %>
+          </div>
+    </div>
+</div>

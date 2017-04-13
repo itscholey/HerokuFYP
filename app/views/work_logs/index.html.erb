@@ -1,0 +1,34 @@
+<% provide(:title, "#{current_user.name}'s Work Log") %>
+<% provide(:pagetitle, "Work Log") %>
+
+<%= link_to "Create a New Entry", new_work_log_path, class: "btn btn-primary task-button" %>
+
+
+<div class="work_logs">
+
+    <% WorkLog.all.where(student_id: current_user.id).each do |worklog| %>
+
+    <div class="work_log">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                  Work Log Details
+                </h3>
+            </div>
+            <div class="panel-body">
+              <p>Lesson: <%= Lesson.find(worklog.lesson_id).name %></p>
+              <p>Date: <%= format_datetime(worklog.date) %></p>
+              <p>Time Spent: <%= worklog.time_spent %> minutes</p>
+              <p>In School:
+                <% if worklog.in_school? %>
+                  Yes
+                <% else %>
+                  No
+                <% end %>
+              </p>
+            </div>
+        </div>
+    </div>
+    <% end %>
+
+</div>

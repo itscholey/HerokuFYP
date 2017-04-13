@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  lesson_id: 
+  date: 2017-04-12 13:31:50
+  time_spent: 1
+  in_school: false
+
+two:
+  user_id: 
+  lesson_id: 
+  date: 2017-04-12 13:31:50
+  time_spent: 1
+  in_school: false

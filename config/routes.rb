@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :conversations
   resources :actionplans
   resources :actionitems
+  resources :work_logs
 
   root 'static_pages#home'
 

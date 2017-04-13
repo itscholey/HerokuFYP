@@ -15,6 +15,7 @@
           <p>Subject Name: <%= @lesson.subject.name %></p>
           <p>Teacher: <%= @lesson.subject.user.name %></p>
           <p>Date: <%= format_datetime(@lesson.date) %></p>
+          <p>Work: <%= link_to "Download Work", @lesson.lesson_work_url %></p>
           <%= link_to "Edit Lesson", edit_lesson_path(@lesson), class: "btn btn-primary" %>
         </div>
     </div>
