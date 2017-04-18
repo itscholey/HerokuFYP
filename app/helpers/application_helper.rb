@@ -11,4 +11,5 @@ module ApplicationHelper
   def format_datetime(date)
     date.strftime("%-I:%M%p, %A %e %B %Y")
   end
+
 end
