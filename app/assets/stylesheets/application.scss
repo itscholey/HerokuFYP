@@ -85,6 +85,10 @@
 // enrolments
 
 // lessons
+.new_lesson textarea, .edit_lesson textarea {
+  resize: none;
+  height: 200px;
+}
 
 // meetings
 .new_meeting textarea {

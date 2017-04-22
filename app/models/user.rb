@@ -29,6 +29,11 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  def User.digest(str)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(str, cost: cost)
+  end
+  
   def role_symbols
     roles.map do |role|
       role.name.underscore.to_sym
@@ -40,7 +45,7 @@ class User < ActiveRecord::Base
 end
 
   def enrolled?(subject)
-    enrollments.any? { |e| e.name.underscore.to_sym == subject }
+    enrolments.any? { |e| e.name.underscore.to_sym == subject }
   end
 
   def enrolments(user)

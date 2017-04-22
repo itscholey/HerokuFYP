@@ -1,7 +1,9 @@
 <% provide(:title, "Users") %>
 <% provide(:pagetitle, "Users") %>
 
-<%= link_to "Create New User", new_user_path, class: "btn btn-primary task-button" %>
+<% if current_user.role?(:admin) %>
+  <%= link_to "Create New User", new_user_path, class: "btn btn-primary task-button" %>
+<% end %>
 
 <% @users.each do |user| %>
 <div class="panel panel-primary">

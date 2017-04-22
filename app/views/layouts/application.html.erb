@@ -42,7 +42,11 @@
                 <a class="nav-link active" href="<%= conversations_path %>">
                   Conversations
                   <span class="badge">
-                    <%= Inbox.where(recipient_id: Recipient.where(user_id: current_user.id).first.id, read: false).count %>
+                    <% if Recipient.where(user_id: current_user.id).count > 0 %>
+                      <%= Inbox.where(recipient_id: Recipient.where(user_id: current_user.id).first.id, read: false).count %>
+                    <% else %>
+                      0
+                    <% end %>
                   </span>
                 </a>
               </li>

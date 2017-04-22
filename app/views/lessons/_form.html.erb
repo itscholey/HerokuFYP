@@ -49,6 +49,14 @@
           </div>
 
           <div class="input-group">
+              <%= f.label :description, hidden: true %>
+              <span class="input-group-addon" id="basic-addon1">Description</span>
+              <%= f.text_area :description, type: "textarea", class: "form-control" %>
+            <br/>
+          </div>
+
+
+          <div class="input-group">
               <%= f.label :lesson_work, hidden: true %>
               <span class="input-group-addon" id="basic-addon1">Lesson Work</span>
               <%= f.file_field :lesson_work, type: "file", class: "form-control" %>

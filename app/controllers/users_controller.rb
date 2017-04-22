@@ -3,8 +3,6 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   before_action :admin?, only: [:new, :create, :destroy]
 
-#rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
   def index
     @users = User.all
   end
@@ -33,7 +31,7 @@ class UsersController < ApplicationController
       flash[:success] = "Profile updated."
       redirect_to @user
     else
-      render 'edit'
+      render :edit
     end
   end
 
