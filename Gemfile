@@ -36,6 +36,10 @@ gem 'pundit'
 
 gem 'carrierwave'
 
+gem 'rspec'
+
+gem 'cucumber'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

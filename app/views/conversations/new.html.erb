@@ -1,34 +1,46 @@
 <% provide(:title, "New Conversation") %>
 <% provide(:pagetitle, "Create a New Conversation") %>
 
-
 <%= link_to "Back to Conversations", conversations_path, class: "btn btn-primary task-button" %>
 
-  <div class="new_conversation">
+<div class="new_conversation">
     <%= form_for @conversation do |f| %>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                  Choose users to start a conversation with.
-                </h3>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Choose users to start a conversation with.
+            </h3>
+        </div>
+        <div class="panel-body">
+            <% if @conversation.errors.any? %>
+            <div id="error_description">
+                The form contains
+                <%= pluralize(@conversation.errors.count, "error") %>.
+                <ul>
+                    <% @conversation.errors.full_messages.each do |m| %>
+                    <li><%= m %></li>
+                    <% end %>
+                </ul>
             </div>
-            <div class="panel-body scroll-area">
-              <%= f.fields_for :recipients do |ff| %>
-                <% User.all.each do |user| %>
-                   <label>
-                     <% if (user.id != current_user.id) %>
-                        <%= check_box_tag "conversation[user_ids][]", user.id %>
-                        <%= user.name %>
-                      <% else %>
-                        <%= check_box_tag "conversation[user_ids][]", user.id, true, style: 'visibility: hidden' %>
-                      <% end %>
-                   </label>
-
-                   <br/>
+            <% end %>
+        </div>
+        <div class="panel-body scroll-area">
+            <%= f.fields_for :recipients do |ff| %>
+            <% User.all.each do |user| %>
+            <label>
+                <% if (user.id != current_user.id) %>
+                <%= check_box_tag "conversation[user_ids][]", user.id %>
+                <%= user.name %>
+            <% else %>
+                <%= check_box_tag "conversation[user_ids][]", user.id, true, style: 'visibility: hidden' %>
                 <% end %>
-              <% end %>
-            </div>
-          </div>
-      <%= f.submit "Create Conversation", class: "btn btn-primary" %>
+            </label>
+
+            <br/>
+            <% end %>
+            <% end %>
+        </div>
+    </div>
+    <%= f.submit "Create Conversation", class: "btn btn-primary" %>
     <% end %>
-  </div>
+</div>

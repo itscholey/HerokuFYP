@@ -1,9 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyString
-
-two:
-  title: MyString
-  description: MyString
+plan:
+  title: The Title
+  description: This is a description of the plan.

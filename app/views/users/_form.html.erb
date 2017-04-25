@@ -54,7 +54,7 @@
                 <br/>
             </div>
 
-            <% if current_user.role?(:admin) and params[:action] == "new" %>
+            <% if current_user.role?(:admin) %>
               <%= f.fields_for :roles do |ff| %>
               <div class="user_roles">
                   <div class="panel panel-primary">

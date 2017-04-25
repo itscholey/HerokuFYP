@@ -9,11 +9,11 @@ class UserLoginTest < ActionDispatch::IntegrationTest
       post login_path, session: {username: "", password: ""}
       # assert this gets redirected back to the new action as it is invalid
       assert_template 'sessions/new'
-      # assert there is a flash message
+      # assert there is a flash message for an error
       assert_not flash.empty?
       # submit a different request
       get root_path
-      # assert the flash message does not appear
+      # assert the flash message does not persist
       assert flash.empty?
     end
 end

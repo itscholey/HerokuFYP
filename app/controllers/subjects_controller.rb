@@ -10,16 +10,11 @@ class SubjectsController < ApplicationController
   def create
     @subject = Subject.new(subject_params)
     teacher = User.find(@subject.user_id)
-    if teacher.role?(:teacher) or teacher.role?(:admin)
       if @subject.save
         render :show
       else
         redirect_to new_subject_path
       end
-    else
-      flash[:danger] = "#{teacher.id} Not a teacher"
-      render :new
-    end
   end
 
   def edit

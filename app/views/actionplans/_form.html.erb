@@ -27,13 +27,15 @@
                       </div>
                       <div class="panel-body scroll-area">
 
-                        <%= f.label :student_id, hidden: true %>
                         <% User.all.each do |user| %>
-                        <label>
-                            <%= radio_button_tag "actionplan[student_id]", user.id %>
-                            <%= user.name %>
-                        </label>
-                        <br/>
+                          <% if user.role?(:student) %>
+                            <%= f.label :student_id, hidden: true %>
+                            <label>
+                                <%= radio_button_tag "actionplan[student_id]", user.id %>
+                                <%= user.name %>
+                            </label>
+                            <br/>
+                          <% end %>
                         <% end %>
                       </div>
                   </div>
@@ -46,13 +48,16 @@
                             <h3 class="panel-title">Action Plan Supervisor:</h3>
                         </div>
                         <div class="panel-body scroll-area">
-                          <%= f.label :supervisor_id, hidden: true %>
+
                           <% User.all.each do |user| %>
-                          <label>
-                              <%= radio_button_tag "actionplan[supervisor_id]", user.id %>
-                              <%= user.name %>
-                          </label>
-                          <br/>
+                            <% if user.role?(:teacher) or user.role?(:admin) %>
+                              <%= f.label :supervisor_id, hidden: true %>
+                              <label>
+                                  <%= radio_button_tag "actionplan[supervisor_id]", user.id %>
+                                  <%= user.name %>
+                              </label>
+                              <br/>
+                            <% end %>
                           <% end %>
 
                         </div>
