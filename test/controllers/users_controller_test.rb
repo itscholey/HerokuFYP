@@ -25,6 +25,4 @@ class UsersControllerTest < ActionController::TestCase
     get :edit, id: @user.id
     assert_response :success
   end
-
-
 end

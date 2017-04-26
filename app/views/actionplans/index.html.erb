@@ -1,6 +1,8 @@
 <% provide(:title, "Action Plans") %>
 <% provide(:pagetitle, "Action Plans") %>
 
+<%= link_to "Create a New Action Plan", new_actionplan_path, class: "btn btn-primary task-button" %>
+
 <% @actionplans.each do |actionplan| %>
   <div class="panel panel-primary">
     <div class="panel-heading">
