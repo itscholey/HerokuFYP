@@ -1,0 +1,150 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+
+
+ */
+/* line 21, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.title {
+  padding-bottom: 10px;
+}
+
+/* line 25, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.scroll-area {
+  overflow-y: scroll;
+}
+
+/* line 29, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.task-button {
+  margin-bottom: 25px;
+}
+
+/* line 33, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.input-group {
+  margin-bottom: 25px;
+}
+
+/* line 37, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.nav {
+  float: right;
+}
+
+/* line 42, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.new_actionplan textarea {
+  resize: none;
+  height: 200px;
+}
+
+/* line 47, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.actionplan_students, .actionitem_assignees {
+  margin-top: 25px;
+}
+
+/* line 51, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.new_actionplan .scroll-area, .edit_actionplan .scroll-area, .new_actionitem .scroll-area {
+  max-height: 200px;
+}
+
+/* line 55, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.actionplan .scroll-area {
+  max-height: 500px;
+}
+
+/* line 61, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.conversation-info .links {
+  float: left;
+}
+
+/* line 65, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.conversation-info .unread {
+  float: right;
+}
+
+/* line 69, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.messages {
+  max-height: 500px;
+  margin-bottom: 25px;
+}
+
+/* line 74, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.new_message textarea {
+  resize: none;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  height: 100px;
+}
+
+/* line 83, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.new_message .btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 92, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.new_lesson textarea, .edit_lesson textarea {
+  resize: none;
+  height: 200px;
+}
+
+/* line 98, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.new_meeting textarea {
+  resize: none;
+  height: 200px;
+}
+
+/* line 103, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.meeting_attendees .scroll-area {
+  max-height: 200px;
+}
+
+/* line 107, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.meeting_attendees {
+  margin-top: 25px;
+}
+
+/* line 114, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.simple-calendar .day {
+  line-height: 50px;
+  width: 50px;
+}
+
+/* line 118, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.calendar-heading {
+  line-height: 50px;
+  background-color: #F9F9F9;
+}
+
+/* line 126, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.enroled_studens .scroll-area {
+  max-height: 200px;
+}
+
+/* line 130, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.lessons .scroll-area {
+  max-height: 400px;
+}
+
+/* line 135, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.user_roles {
+  margin-top: 25px;
+}
+
+/* line 143, /home/chloe/heroku-fyp/fyp-site/app/assets/stylesheets/application.scss */
+.new_worklog textarea {
+  resize: none;
+  height: 200px;
+}
