@@ -26,8 +26,9 @@
             <h3 class="panel-title">
                 <%= Recipient.find(m.recipient_id).user.name %>, sent:
                 <%= format_datetime(m.created_at) %>
-                <% current_inbox = Inbox.where(recipient_id: m.recipient_id, message_id: m.id).first %>
-                <% if (Message.find(m.id).recipient_id != Recipient.where(user_id: current_user.id, conversation_id: m.conversation_id).first.id) %>
+                <% this_recipient = Recipient.where(user_id: current_user.id, conversation_id: m.conversation_id).first.id %>
+                <% current_inbox = Inbox.where(recipient_id: this_recipient, message_id: m.id).first %>
+                <% if (Message.find(m.id).recipient_id != this_recipient) %>
                   <% if (current_inbox.read == false) %>
                     NEW
                   <% end %>

@@ -9,7 +9,7 @@
 
     <div class="conversation">
         <div class="panel
-                <% if Inbox.where(recipient_id: Recipient.where(user_id: current_user.id).first.id, read: false).count > 0 %>
+                <% if Inbox.where(recipient_id: Recipient.where(user_id: current_user.id, conversation_id: conversation.id).first.id, read: false).count > 0 %>
                   <%= "panel-info" %>
                 <% else %>
                   <%= "panel-primary" %>
@@ -31,7 +31,7 @@
                 <div class="unread"
                   <span class="badge">
                     Unread Messages:
-                    <%= Inbox.where(recipient_id: Recipient.where(user_id: current_user.id).first.id, read: false).count %>
+                    <%= Inbox.where(recipient_id: Recipient.where(user_id: current_user.id, conversation_id: conversation.id).first.id, read: false).count %>
                   </span>
                 </div>
               </div>
